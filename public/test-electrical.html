@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" name="Pragma" content="no-cache">
+    <title>MSE Prototype</title>
+
+    <!-- Bootstrap -->
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap -->
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/098aba01d6.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Font Awesome -->
+
+
+
+
+    <!---CSS-->
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            position: relative;
+            background-color: #3b3e42;
+            /* background-image: url('img/grid-bg.jpg'); */
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .test-image {
+            position: absolute;
+            top: 3vw;
+            left: 14vw;
+            width: 70vw;
+            z-index: -1;
+
+        }
+
+        .instruction-text {
+            position: absolute;
+            top: 43vw;
+            left: 42vw;
+        }
+
+        .switch-btn {
+            position: absolute;
+            width: 4vw;
+            height: 2vw;
+            top: 35.65vw;
+            left: 50.2vw;
+        }
+
+        .back-arrow {
+            position: absolute;
+            color: white;
+            top: 3vw;
+            left: 3vw;
+        }
+
+        .electric-switch {
+            position: absolute;
+            top: 18vw;
+            left: 31.3vw;
+            width: 0.3vw;
+            height: 5vw;
+            display: inline-block;
+            transform-origin: bottom left;
+            transform: rotate(-45deg);
+        }
+
+        .switch-animation-on {
+            transform: rotate(0deg);
+            transition: all 0.5s ease-in;
+        }
+
+        .switch-animation-off {
+            transform: rotate(-45deg);
+            transition: all 0.5s ease-in;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="container relative">
+        <div class="image-wrapper">
+            <img class="test-image" src="img/electric-switch-off.jpg">
+        </div>
+        <div class="instruction-text row justify-content-center text-muted">
+            Press [Enter] to turn on the switch.
+        </div>
+
+        <!-- on off button -->
+        <div class="bg-secondary switch-btn rounded">
+        </div>
+
+        <!-- switch -->
+        <div class="bg-white electric-switch">
+        </div>
+
+        <i class="fa fa-arrow-left back-arrow fa-2x" aria-hidden="true"></i>
+
+
+
+
+
+    </div>
+
+
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Script -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            var firstClueNo = window.localStorage.getItem("firstClue");
+            var switchOn = false; //boolean for whether switch is on or off
+            var canConductElectrcity = false; //all cannot conduct electricity except for A
+
+            if (firstClueNo == "A") {
+                canConductElectrcity = true;
+            }
+
+            document.addEventListener('keydown', function (event) {
+                switch (event.key) {
+                    case "Enter": //Enter key
+                        if (!switchOn) {
+                            $(".switch-btn").animate({ left: "45.7vw" });
+                            $(".electric-switch").removeClass("switch-animation-off")
+                            $(".electric-switch").addClass("switch-animation-on")
+                            setTimeout(function () {
+                                if (canConductElectrcity) {
+                                    $(".test-image").attr("src", "img/electric-conductive.jpg");
+                                } else {
+                                    $(".test-image").attr("src", "img/electric-nonconductive.jpg");
+                                }
+                                $(".instruction-text").text("Press [Enter] to turn off the switch.")
+                            }, 550);
+                            switchOn = true;
+                            
+                            //record that test has been done
+                            localStorage.setItem('firstClueElectricTest', true); 
+                        } else {
+                            $(".switch-btn").animate({ left: "50.2vw" });
+                            $(".electric-switch").removeClass("switch-animation-on")
+                            $(".electric-switch").addClass("switch-animation-off")
+                            setTimeout(function () {
+                                $(".test-image").attr("src", "img/electric-switch-off.jpg");
+                                $(".instruction-text").text("Press [Enter] to turn on the switch.")
+                            }, 550);
+                            switchOn = false;
+
+                        }
+                        break;
+                    case "ArrowLeft":
+                        window.location.href = "clue1.html"
+                        break;
+                    default:
+                        return;
+                }
+            });
+
+
+
+
+        });
+
+    </script>
+
+</body>
+
+</html>

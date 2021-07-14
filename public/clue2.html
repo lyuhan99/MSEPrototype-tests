@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" name="Pragma" content="no-cache">
+    <title>MSE Prototype</title>
+
+    <!-- Bootstrap -->
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap -->
+
+
+
+
+    <!---CSS-->
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            position: relative;
+            background-color: #3b3e42;
+            background-image: url('img/Clue2.PNG');
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .next-btn-wrapper {
+            position: relative;
+            top: 72vh;
+            /* left: 41.75vw;
+            max-width: 20vw;
+            height: auto; */
+            background: transparent;
+        }
+
+        .next-btn {
+            position: relative;
+            border-radius: 2vw;
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    
+    <div class="container relative">
+        <div class="next-btn-wrapper">
+            <div class="row justify-content-center">
+                <div class="col-md-4 offset-md-3 mr-5 my-auto">
+                    <button type="button" class="next-btn btn btn-light rounded-pill">Next</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="next-btn-wrapper">
+        </div> -->
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Script -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var secondClueNo = window.localStorage.getItem("secondClue");
+
+            var clueImgURL = "url('img/Clue" + secondClueNo + "2.png')";
+            console.log(clueImgURL);
+
+            document.body.style.backgroundImage = clueImgURL;
+
+            console.log("Webpage ready");
+
+            $('.next-btn').click(function () {
+                window.location.href = "sampling2.html"
+            });
+        });
+    </script>
+
+</body>
+
+</html>
