@@ -2,12 +2,12 @@
 const express = require('express');  // include the "express" module
 const app = express();
 const path = require('path');
-const port = 3000;
+const port = 3500;
 
 // Define route for get request at '/'
 //app.get('/', (req, res) => res.send('hello, express world'));
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
+    res.sendFile(path.join(__dirname, '/public/clue1.html'));
 });
 // Define the static resource (HTML/CSS/JS/images)
 app.use(express.static('public'));             // URL '/' (root) maps to 'public' directory
