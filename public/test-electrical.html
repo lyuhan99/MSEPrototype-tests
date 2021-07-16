@@ -162,9 +162,9 @@
                                 $(".instruction-text").text("Press [Enter] to turn off the switch.")
                             }, 550);
                             switchOn = true;
-                            
+
                             //record that test has been done
-                            localStorage.setItem('firstClueElectricTest', true); 
+                            localStorage.setItem('firstClueElectricTest', true);
                         } else {
                             $(".switch-btn").animate({ left: "50.2vw" });
                             $(".electric-switch").removeClass("switch-animation-on")
@@ -178,7 +178,7 @@
                         }
                         break;
                     case "ArrowLeft":
-                        window.location.href = "clue1.html"
+                        window.location.href = "test-selection-part1.html"
                         break;
                     default:
                         return;
