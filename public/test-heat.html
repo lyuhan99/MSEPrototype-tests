@@ -282,6 +282,7 @@
                 //data is what is received
                 messageReceived = data + "";
                 if (messageReceived == "heat_up") {
+                    console.log(heatUpCount);
                     heatUpCount++;
                     if (heatUpCount == 10) {
                         $(".tap-dial").removeClass("tap-animation-0")
