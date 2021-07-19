@@ -277,6 +277,12 @@
 
             var heatUpCount = 0;
 
+            //sending and receiving data
+            var socket = io();
+
+            var messageReceived;
+
+
             socket.on('data', function (data) {
                 console.log(data);
                 //data is what is received
