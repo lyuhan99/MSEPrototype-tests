@@ -363,7 +363,7 @@
                 } else if (messageReceived == "heat_down") {
                     console.log(heatUpCount);
                     heatUpCount--;
-                    if (heatUpCount < 20) {
+                    if (heatUpCount == 9) {
                         $(".tap-dial").removeClass("tap-animation-2000");
                         $(".tap-dial").addClass("tap-animation-1000");
                         setTimeout(function () {
@@ -375,7 +375,7 @@
                                 $(".clue-table").addClass("table-orange")
                             }, 700);
                         }, 300);
-                    } else if (heatUpCount < 10) {
+                    } else if (heatUpCount == 0) {
                         $(".tap-dial").removeClass("tap-animation-1000")
                         $(".tap-dial").addClass("tap-animation-0")
                         setTimeout(function () {
