@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Bootstrap -->
 
+    <!----Socket to send stuff to arduino --->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+
     <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/098aba01d6.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -271,6 +274,91 @@
             //B hydrophobic - melt at 1000
             //C ceramic - nothing happens
             //D hydrodynamic - melt at 1000
+
+            var heatUpCount = 0;
+
+            socket.on('data', function (data) {
+                console.log(data);
+                //data is what is received
+                messageReceived = data + "";
+                if (messageReceived == "heat_up") {
+                    heatUpCount++;
+                    if (heatUpCount == 10) {
+                        $(".tap-dial").removeClass("tap-animation-0")
+                        $(".tap-dial").addClass("tap-animation-1000")
+                        setTimeout(function () {
+                            //show three fires
+                            $(".fire-image2").fadeIn(3000);
+                            $(".fire-image3").fadeIn(3000);
+                            $(".fire-image4").fadeIn(3000);
+                            setTimeout(function () {
+                                $(".clue-table").removeClass("table-grey-fast")
+                                $(".clue-table").removeClass("table-grey")
+                                $(".clue-table").addClass("table-orange")
+                                setTimeout(function () {
+                                    if (resetObject == false) {
+                                        if (firstClueNo == "A") {
+                                            $(".clue-image").fadeOut(2000);
+                                            $(".clue-half-melt").fadeIn(1000);
+                                        } else if (firstClueNo == "B") {
+                                            $(".clue-image").fadeOut(2000);
+                                            $(".clue-melt").fadeIn(1000);
+                                            resetObject = true;
+                                            localStorage.setItem('firstClueHeatTest', true);
+                                            setTimeout(function () {
+                                                $(".instruction-text").text("Press [Enter] to start again.")
+                                            }, 2500);
+                                        } else if (firstClueNo == "D") {
+                                            $(".clue-image").fadeOut(2000);
+                                            $(".clue-melt").fadeIn(1000);
+                                            resetObject = true;
+                                            localStorage.setItem('firstClueHeatTest', true);
+                                            setTimeout(function () {
+                                                $(".instruction-text").text("Press [Enter] to start again.")
+                                            }, 2500);
+                                        }
+                                    }
+                                }, 2000);
+                            }, 700);
+                        }, 300);
+                    } else if (heatUpCount == 20) {
+                        $(".tap-dial").removeClass("tap-animation-1000")
+                        $(".tap-dial").addClass("tap-animation-2000")
+                        setTimeout(function () {
+                            //show two more fires
+                            $(".fire-image1").fadeIn(3000);
+                            $(".fire-image5").fadeIn(3000);
+                            setTimeout(function () {
+                                $(".clue-table").removeClass("table-orange")
+                                $(".clue-table").addClass("table-red")
+                                setTimeout(function () {
+                                    if (resetObject == false) {
+                                        if (firstClueNo == "A") {
+                                            $(".clue-half-melt").fadeOut(2000);
+                                            $(".clue-melt").fadeIn(1000);
+                                            resetObject = true;
+                                            localStorage.setItem('firstClueHeatTest', true);
+                                            setTimeout(function () {
+                                                $(".instruction-text").text("Press [Enter] to start again.")
+                                            }, 2500);
+                                        } else if (firstClueNo == "C") {
+                                            resetObject = true;
+                                            localStorage.setItem('firstClueHeatTest', true);
+                                            setTimeout(function () {
+                                                $(".instruction-text").text("Press [Enter] to start again.")
+                                            }, 2500);
+                                        }
+                                    }
+                                }, 2000);
+                            }, 700);
+                        }, 300);
+                    }
+
+                } else if (messageReceived == "heat_down") {
+                    // window.location.href = "test-selection-part1.html"
+
+                }
+            });
 
             document.addEventListener('keydown', function (event) {
                 switch (event.key) {
