@@ -311,11 +311,11 @@
                     $(".switch-btn").animate({ left: "62vw" }, 900);
                     setTimeout(function () {
                         if (isHydrodynamic) {
-                            $(".instruction-text").text("Press [Enter] to start again.")
+                            $(".instruction-text").text("Move the slider back to go back to the menu")
                             $(".clue-wrapper").animate({ left: "62vw" }, 2000);
                             $(".clue-wrapper").fadeOut();
                         } else {
-                            $(".instruction-text").text("Press [Enter] to start again.")
+                            $(".instruction-text").text("Moving the slider back to go back to the menu")
                             $(".clue-wrapper").animate({ left: "62vw" }, 30000);
                             $(".clue-wrapper").fadeOut();
                         }
@@ -324,15 +324,18 @@
                     }, 800);
                     clueMoving = true;
                 } else if (messageReceived == "slide_1") {
-                    $(".clue-wrapper").stop();
-                    $(".clue-wrapper").fadeOut();
-                    $(".switch-btn").animate({ left: "35vw" }, 900);
-                    setTimeout(function () {
-                        $(".instruction-text").text("Press [Enter] to move the slider.")
-                    }, 550);
-                    $(".clue-wrapper").css({ left: "29vw" });
-                    $(".clue-wrapper").fadeIn();
-                    clueMoving = false;
+                    window.location.href = "test-selection-part1.html"
+
+                    // //reset the set-up
+                    // $(".clue-wrapper").stop();
+                    // $(".clue-wrapper").fadeOut();
+                    // $(".switch-btn").animate({ left: "35vw" }, 900);
+                    // setTimeout(function () {
+                    //     $(".instruction-text").text("Move the slider to control the sample's speed.")
+                    // }, 550);
+                    // $(".clue-wrapper").css({ left: "29vw" });
+                    // $(".clue-wrapper").fadeIn();
+                    // clueMoving = false;
 
                 }
             });
