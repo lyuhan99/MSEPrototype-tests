@@ -301,7 +301,7 @@
             var socket = io();
 
             var messageReceived;
-            var clueFound = false; //check if clue has been found
+
             socket.on('data', function (data) {
                 console.log(data);
                 //data is what is received
@@ -322,6 +322,7 @@
                         //record that test has been done
                         localStorage.setItem('firstClueHydrodynamicTest', true);
                     }, 800);
+                    clueMoving = true;
                 } else if (messageReceived == "slide_1") {
                     $(".clue-wrapper").stop();
                     $(".clue-wrapper").fadeOut();
