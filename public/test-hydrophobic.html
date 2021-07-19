@@ -203,7 +203,7 @@
                         }, 700);
                     }
                 } else if (messageReceived == "tap_down") {
-                    tapUpCount++;
+                    tapUpCount--;
                     if (tapUpCount == 0) {
                         $(".tap-dial").removeClass("tap-animation-on")
                         $(".tap-dial").addClass("tap-animation-off")
