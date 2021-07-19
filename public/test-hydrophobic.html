@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Bootstrap -->
 
+    <!----Socket to send stuff to arduino --->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+
     <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/098aba01d6.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -162,6 +165,60 @@
 
             //hide water droplet object
             $(".water-droplet").hide()
+
+            //sending and receiving data
+            var socket = io();
+
+            var messageReceived;
+            var tapUpCount = 0;
+
+            socket.on('data', function (data) {
+                console.log(data);
+                //data is what is received
+                messageReceived = data + "";
+                if (messageReceived == "tap_up") {
+                    tapUpCount++;
+                    console.log(tapUpCount);
+                    if (tapUpCount == 10) {
+                        localStorage.setItem('firstClueHydrophobicTest', true);
+                        $(".tap-dial").removeClass("tap-animation-off")
+                        $(".tap-dial").addClass("tap-animation-on")
+                        setTimeout(function () {
+                            $(".test-image").attr("src", "img/tap-start.jpg");
+                            setTimeout(function () {
+                                $(".test-image").attr("src", "img/tap-off.jpg");
+                                $(".water-droplet").show()
+                                $(".water-droplet").animate({ top: "29.5vw" });
+                                setTimeout(function () {
+                                    if (isHydrophobic) {
+                                        //do nothing
+                                    } else {
+                                        $(".water-droplet").hide()
+                                        $(".test-image").attr("src", "img/not-hydrophobic2.jpg");
+                                    }
+                                    //record that test has been done
+                                    $(".instruction-text").text("Press [Enter] to start again.")
+                                }, 350);
+                            }, 100);
+                        }, 700);
+                    }
+                } else if (messageReceived == "tap_down") {
+                    tapUpCount++;
+                    if (tapUpCount == 0) {
+                        $(".tap-dial").removeClass("tap-animation-on")
+                        $(".tap-dial").addClass("tap-animation-off")
+                        $(".water-droplet").fadeOut()
+                        setTimeout(function () {
+                            $(".water-droplet").animate({ top: "19.9vw" }); //return water droplet to original position
+                            $(".test-image").attr("src", "img/tap-off.jpg");
+                            $(".instruction-text").text("Press [Enter] to turn on the tap.")
+                        }, 700);
+                    }
+
+
+                }
+            });
+
 
             document.addEventListener('keydown', function (event) {
                 switch (event.key) {

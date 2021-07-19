@@ -282,7 +282,6 @@
 
             var messageReceived;
 
-
             socket.on('data', function (data) {
                 console.log(data);
                 //data is what is received
@@ -399,127 +398,127 @@
             document.addEventListener('keydown', function (event) {
                 switch (event.key) {
                     case "d": //Enter key
-                        resetObject = false;
-                        console.log(temperature);
-                        if (temperature == 0) { //temperature becomes 1000 degrees
-                            temperature = 1000
-                            $(".tap-dial").removeClass("tap-animation-0")
-                            $(".tap-dial").addClass("tap-animation-1000")
-                            setTimeout(function () {
-                                //show three fires
-                                $(".fire-image2").fadeIn(3000);
-                                $(".fire-image3").fadeIn(3000);
-                                $(".fire-image4").fadeIn(3000);
-                                setTimeout(function () {
-                                    $(".clue-table").removeClass("table-grey-fast")
-                                    $(".clue-table").removeClass("table-grey")
-                                    $(".clue-table").addClass("table-orange")
-                                    setTimeout(function () {
-                                        if (resetObject == false) {
-                                            if (firstClueNo == "A") {
-                                                $(".clue-image").fadeOut(2000);
-                                                $(".clue-half-melt").fadeIn(1000);
-                                            } else if (firstClueNo == "B") {
-                                                $(".clue-image").fadeOut(2000);
-                                                $(".clue-melt").fadeIn(1000);
-                                                resetObject = true;
-                                                localStorage.setItem('firstClueHeatTest', true);
-                                                setTimeout(function () {
-                                                    $(".instruction-text").text("Press [Enter] to start again.")
-                                                }, 2500);
-                                            } else if (firstClueNo == "D") {
-                                                $(".clue-image").fadeOut(2000);
-                                                $(".clue-melt").fadeIn(1000);
-                                                resetObject = true;
-                                                localStorage.setItem('firstClueHeatTest', true);
-                                                setTimeout(function () {
-                                                    $(".instruction-text").text("Press [Enter] to start again.")
-                                                }, 2500);
-                                            }
-                                        }
-                                    }, 2000);
-                                }, 700);
-                            }, 300);
-                        } else if (temperature == 1000) { //temperature becomes 2000 degrees
-                            temperature = 2000
-                            $(".tap-dial").removeClass("tap-animation-1000")
-                            $(".tap-dial").addClass("tap-animation-2000")
-                            setTimeout(function () {
-                                //show two more fires
-                                $(".fire-image1").fadeIn(3000);
-                                $(".fire-image5").fadeIn(3000);
-                                setTimeout(function () {
-                                    $(".clue-table").removeClass("table-orange")
-                                    $(".clue-table").addClass("table-red")
-                                    setTimeout(function () {
-                                        if (resetObject == false) {
-                                            if (firstClueNo == "A") {
-                                                $(".clue-half-melt").fadeOut(2000);
-                                                $(".clue-melt").fadeIn(1000);
-                                                resetObject = true;
-                                                localStorage.setItem('firstClueHeatTest', true);
-                                                setTimeout(function () {
-                                                    $(".instruction-text").text("Press [Enter] to start again.")
-                                                }, 2500);
-                                            } else if (firstClueNo == "C") {
-                                                resetObject = true;
-                                                localStorage.setItem('firstClueHeatTest', true);
-                                                setTimeout(function () {
-                                                    $(".instruction-text").text("Press [Enter] to start again.")
-                                                }, 2500);
-                                            }
-                                        }
-                                    }, 2000);
-                                }, 700);
-                            }, 300);
-                        } else {
+                        // resetObject = false;
+                        // console.log(temperature);
+                        // if (temperature == 0) { //temperature becomes 1000 degrees
+                        //     temperature = 1000
+                        //     $(".tap-dial").removeClass("tap-animation-0")
+                        //     $(".tap-dial").addClass("tap-animation-1000")
+                        //     setTimeout(function () {
+                        //         //show three fires
+                        //         $(".fire-image2").fadeIn(3000);
+                        //         $(".fire-image3").fadeIn(3000);
+                        //         $(".fire-image4").fadeIn(3000);
+                        //         setTimeout(function () {
+                        //             $(".clue-table").removeClass("table-grey-fast")
+                        //             $(".clue-table").removeClass("table-grey")
+                        //             $(".clue-table").addClass("table-orange")
+                        //             setTimeout(function () {
+                        //                 if (resetObject == false) {
+                        //                     if (firstClueNo == "A") {
+                        //                         $(".clue-image").fadeOut(2000);
+                        //                         $(".clue-half-melt").fadeIn(1000);
+                        //                     } else if (firstClueNo == "B") {
+                        //                         $(".clue-image").fadeOut(2000);
+                        //                         $(".clue-melt").fadeIn(1000);
+                        //                         resetObject = true;
+                        //                         localStorage.setItem('firstClueHeatTest', true);
+                        //                         setTimeout(function () {
+                        //                             $(".instruction-text").text("Press [Enter] to start again.")
+                        //                         }, 2500);
+                        //                     } else if (firstClueNo == "D") {
+                        //                         $(".clue-image").fadeOut(2000);
+                        //                         $(".clue-melt").fadeIn(1000);
+                        //                         resetObject = true;
+                        //                         localStorage.setItem('firstClueHeatTest', true);
+                        //                         setTimeout(function () {
+                        //                             $(".instruction-text").text("Press [Enter] to start again.")
+                        //                         }, 2500);
+                        //                     }
+                        //                 }
+                        //             }, 2000);
+                        //         }, 700);
+                        //     }, 300);
+                        // } else if (temperature == 1000) { //temperature becomes 2000 degrees
+                        //     temperature = 2000
+                        //     $(".tap-dial").removeClass("tap-animation-1000")
+                        //     $(".tap-dial").addClass("tap-animation-2000")
+                        //     setTimeout(function () {
+                        //         //show two more fires
+                        //         $(".fire-image1").fadeIn(3000);
+                        //         $(".fire-image5").fadeIn(3000);
+                        //         setTimeout(function () {
+                        //             $(".clue-table").removeClass("table-orange")
+                        //             $(".clue-table").addClass("table-red")
+                        //             setTimeout(function () {
+                        //                 if (resetObject == false) {
+                        //                     if (firstClueNo == "A") {
+                        //                         $(".clue-half-melt").fadeOut(2000);
+                        //                         $(".clue-melt").fadeIn(1000);
+                        //                         resetObject = true;
+                        //                         localStorage.setItem('firstClueHeatTest', true);
+                        //                         setTimeout(function () {
+                        //                             $(".instruction-text").text("Press [Enter] to start again.")
+                        //                         }, 2500);
+                        //                     } else if (firstClueNo == "C") {
+                        //                         resetObject = true;
+                        //                         localStorage.setItem('firstClueHeatTest', true);
+                        //                         setTimeout(function () {
+                        //                             $(".instruction-text").text("Press [Enter] to start again.")
+                        //                         }, 2500);
+                        //                     }
+                        //                 }
+                        //             }, 2000);
+                        //         }, 700);
+                        //     }, 300);
+                        // } else {
 
-                        }
+                        // }
                         break;
                     case "a":
-                        if (temperature == 2000) { //temperature becomes 1000 degrees
-                            temperature = 1000;
-                            $(".tap-dial").removeClass("tap-animation-2000");
-                            $(".tap-dial").addClass("tap-animation-1000");
-                            setTimeout(function () {
-                                //hide two fires
-                                $(".fire-image1").fadeOut(3000);
-                                $(".fire-image5").fadeOut(3000);
-                                setTimeout(function () {
-                                    $(".clue-table").removeClass("table-red")
-                                    $(".clue-table").addClass("table-orange")
-                                }, 700);
-                            }, 300);
-                        } else if (temperature == 1000) { //temperature becomes 0 degrees
-                            temperature = 0
-                            $(".tap-dial").removeClass("tap-animation-1000")
-                            $(".tap-dial").addClass("tap-animation-0")
-                            setTimeout(function () {
-                                //hide all fires
-                                $(".fire-image2").fadeOut(3000);
-                                $(".fire-image3").fadeOut(3000);
-                                $(".fire-image4").fadeOut(3000);
-                                setTimeout(function () {
-                                    $(".clue-table").removeClass("table-orange")
-                                    $(".clue-table").addClass("table-grey")
-                                }, 700);
-                            }, 300);
-                        } else {
+                        // if (temperature == 2000) { //temperature becomes 1000 degrees
+                        //     temperature = 1000;
+                        //     $(".tap-dial").removeClass("tap-animation-2000");
+                        //     $(".tap-dial").addClass("tap-animation-1000");
+                        //     setTimeout(function () {
+                        //         //hide two fires
+                        //         $(".fire-image1").fadeOut(3000);
+                        //         $(".fire-image5").fadeOut(3000);
+                        //         setTimeout(function () {
+                        //             $(".clue-table").removeClass("table-red")
+                        //             $(".clue-table").addClass("table-orange")
+                        //         }, 700);
+                        //     }, 300);
+                        // } else if (temperature == 1000) { //temperature becomes 0 degrees
+                        //     temperature = 0
+                        //     $(".tap-dial").removeClass("tap-animation-1000")
+                        //     $(".tap-dial").addClass("tap-animation-0")
+                        //     setTimeout(function () {
+                        //         //hide all fires
+                        //         $(".fire-image2").fadeOut(3000);
+                        //         $(".fire-image3").fadeOut(3000);
+                        //         $(".fire-image4").fadeOut(3000);
+                        //         setTimeout(function () {
+                        //             $(".clue-table").removeClass("table-orange")
+                        //             $(".clue-table").addClass("table-grey")
+                        //         }, 700);
+                        //     }, 300);
+                        // } else {
 
-                        }
+                        // }
                         break;
                     case "Enter":
-                        if (resetObject) {
-                            $(".tap-dial").removeClass("tap-animation-1000")
-                            $(".tap-dial").addClass("tap-animation-0")
-                            $(".clue-table").removeClass("table-orange")
-                            $(".clue-table").addClass("table-grey-fast")
-                            $(".clue-melt").fadeOut();
-                            $(".clue-image").fadeIn();
-                            $(".fire-image").fadeOut();
-                            $(".instruction-text").text("Use the D and A keys to control the temperature.")
-                            temperature = 0;
-                        }
+                        // if (resetObject) {
+                        //     $(".tap-dial").removeClass("tap-animation-1000")
+                        //     $(".tap-dial").addClass("tap-animation-0")
+                        //     $(".clue-table").removeClass("table-orange")
+                        //     $(".clue-table").addClass("table-grey-fast")
+                        //     $(".clue-melt").fadeOut();
+                        //     $(".clue-image").fadeIn();
+                        //     $(".fire-image").fadeOut();
+                        //     $(".instruction-text").text("Use the D and A keys to control the temperature.")
+                        //     temperature = 0;
+                        // }
                         break;
                     case "ArrowLeft":
                         window.location.href = "test-selection-part1.html"
