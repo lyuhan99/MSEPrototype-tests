@@ -360,8 +360,37 @@
                             }, 700);
                         }, 300);
                     }
-
                 } else if (messageReceived == "heat_down") {
+                    console.log(heatUpCount);
+                    heatUpCount--;
+                    if (heatUpCount < 20) {
+                        $(".tap-dial").removeClass("tap-animation-2000");
+                        $(".tap-dial").addClass("tap-animation-1000");
+                        setTimeout(function () {
+                            //hide two fires
+                            $(".fire-image1").fadeOut(3000);
+                            $(".fire-image5").fadeOut(3000);
+                            setTimeout(function () {
+                                $(".clue-table").removeClass("table-red")
+                                $(".clue-table").addClass("table-orange")
+                            }, 700);
+                        }, 300);
+                    } else if (heatUpCount < 10) {
+                        $(".tap-dial").removeClass("tap-animation-1000")
+                        $(".tap-dial").addClass("tap-animation-0")
+                        setTimeout(function () {
+                            //hide all fires
+                            $(".fire-image2").fadeOut(3000);
+                            $(".fire-image3").fadeOut(3000);
+                            $(".fire-image4").fadeOut(3000);
+                            setTimeout(function () {
+                                $(".clue-table").removeClass("table-orange")
+                                $(".clue-table").addClass("table-grey")
+                            }, 700);
+                        }, 300);
+                    }
+
+
                     // window.location.href = "test-selection-part1.html"
 
                 }
