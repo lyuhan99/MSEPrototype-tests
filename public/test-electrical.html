@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Bootstrap -->
 
+    <!----Socket to send stuff to arduino --->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+
     <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/098aba01d6.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -146,25 +149,56 @@
                 canConductElectrcity = true;
             }
 
+            //sending and receiving data
+            var socket = io();
+
+            var messageReceived;
+
+            socket.on('data', function (data) {
+                console.log(data);
+                //data is what is received
+                messageReceived = data + "";
+                if (messageReceived == "switch_on") {
+                    $(".switch-btn").animate({ left: "45.7vw" });
+                    $(".electric-switch").removeClass("switch-animation-off")
+                    $(".electric-switch").addClass("switch-animation-on")
+                    setTimeout(function () {
+                        if (canConductElectrcity) {
+                            $(".test-image").attr("src", "img/electric-conductive.jpg");
+                        } else {
+                            $(".test-image").attr("src", "img/electric-nonconductive.jpg");
+                        }
+                        $(".instruction-text").text("Press [Enter] to turn off the switch.")
+                    }, 550);
+                    switchOn = true;
+
+                    //record that test has been done
+                    localStorage.setItem('firstClueElectricTest', true);
+                } else if (messageReceived == "switch_off") {
+                    window.location.href = "test-selection-part1.html"
+
+                }
+            });
+
             document.addEventListener('keydown', function (event) {
                 switch (event.key) {
                     case "Enter": //Enter key
                         if (!switchOn) {
-                            $(".switch-btn").animate({ left: "45.7vw" });
-                            $(".electric-switch").removeClass("switch-animation-off")
-                            $(".electric-switch").addClass("switch-animation-on")
-                            setTimeout(function () {
-                                if (canConductElectrcity) {
-                                    $(".test-image").attr("src", "img/electric-conductive.jpg");
-                                } else {
-                                    $(".test-image").attr("src", "img/electric-nonconductive.jpg");
-                                }
-                                $(".instruction-text").text("Press [Enter] to turn off the switch.")
-                            }, 550);
-                            switchOn = true;
+                            // $(".switch-btn").animate({ left: "45.7vw" });
+                            // $(".electric-switch").removeClass("switch-animation-off")
+                            // $(".electric-switch").addClass("switch-animation-on")
+                            // setTimeout(function () {
+                            //     if (canConductElectrcity) {
+                            //         $(".test-image").attr("src", "img/electric-conductive.jpg");
+                            //     } else {
+                            //         $(".test-image").attr("src", "img/electric-nonconductive.jpg");
+                            //     }
+                            //     $(".instruction-text").text("Press [Enter] to turn off the switch.")
+                            // }, 550);
+                            // switchOn = true;
 
-                            //record that test has been done
-                            localStorage.setItem('firstClueElectricTest', true);
+                            // //record that test has been done
+                            // localStorage.setItem('firstClueElectricTest', true);
                         } else {
                             $(".switch-btn").animate({ left: "50.2vw" });
                             $(".electric-switch").removeClass("switch-animation-on")
