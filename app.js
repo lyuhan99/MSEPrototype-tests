@@ -26,7 +26,7 @@ const parser = new parsers.Readline({
 });
 
 //specify location of the serial port! 
-var serialPort = new SerialPort('COM5', {
+var serialPort = new SerialPort('COM8', {
     baudRate: 9600,
     dataBits: 8,
     parity: 'none',
