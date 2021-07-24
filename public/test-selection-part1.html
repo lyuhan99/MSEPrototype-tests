@@ -119,9 +119,9 @@
                 <div class="col-md-3">
                     <div class="card text-center mt-4 bg-light text-dark border-0">
                         <div class="card-body my-3">
-                            <i class="fas fa-water fa-3x mb-2"></i>
+                            <i class="fas fa-stream fa-3x mb-2"></i>
                             <br>
-                            Hydrodynamics
+                            Tensile Strength
                         </div>
                         <div class="card-footer bg-secondary text-white">
                             Press B
@@ -210,13 +210,13 @@
             var electricTestDone = window.localStorage.getItem("firstClueElectricTest");
             var hydrophobicTestDone = window.localStorage.getItem("firstClueHydrophobicTest");
             var heatTestDone = window.localStorage.getItem("firstClueHeatTest");
-            var hydrodynamicTestDone = window.localStorage.getItem("firstClueHydrodynamicTest");
+            var tensileTestDone = window.localStorage.getItem("firstClueTensileTest");
 
             console.log(electricTestDone)
             console.log(hydrophobicTestDone)
 
             if (electricTestDone == "true" && hydrophobicTestDone == "true"
-                && heatTestDone == "true" && hydrodynamicTestDone == "true") {
+                && heatTestDone == "true" && tensileTestDone == "true") {
                 allTestsDone = true;
                 $('.next-btn').fadeIn();
 
@@ -230,7 +230,7 @@
                         window.location.href = "test-electrical.html"
                         break;
                     case "b":
-                        window.location.href = "test-hydrodynamic.html"
+                        window.location.href = "test-tensile.html"
                         break;
                     case "c":
                         window.location.href = "test-hydrophobic.html"
