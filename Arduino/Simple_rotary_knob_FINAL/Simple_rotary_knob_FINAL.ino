@@ -64,21 +64,21 @@ void receiveEvent(int bytes)
    // If the previous and the current state of the inputCLK are different then a pulse has occured
    if (currentStateCLK1 != previousStateCLK1)
    { 
-     //Serial.print("knob 1 has rotated");
+     Serial.print("knob 1 has rotated");
      // If the inputDT state is different than the inputCLK state then 
      // the encoder is rotating counterclockwise
      if (digitalRead(inputDT1) != currentStateCLK1) 
      { 
        counter1++;
-       encdir1 ="heat_up";
+       encdir1 ="CW";
      } 
      else 
      {
        // Encoder is rotating clockwise
        counter1--;
-       encdir1 ="heat_down";
+       encdir1 ="CCW";
      }
-     //Serial.print(" Direction: ");
+     Serial.print(" Direction: ");
      Serial.println(encdir1);
 //     Serial.print(" -- Value: ");
 //     Serial.println(counter1);
@@ -87,21 +87,21 @@ void receiveEvent(int bytes)
    
    if (currentStateCLK2 != previousStateCLK2)
    { 
-     //Serial.print("knob 2 has rotated");
+     Serial.print("knob 2 has rotated");
      // If the inputDT state is different than the inputCLK state then 
      // the encoder is rotating counterclockwise
      if (digitalRead(inputDT2) != currentStateCLK2) 
      { 
        counter2++;
-       encdir2 ="tap_up";
+       encdir2 ="CW";
      } 
      else 
      {
        // Encoder is rotating clockwise
        counter2--;
-       encdir2 ="tap_down";
+       encdir2 ="CCW";
      }
-     //Serial.print(" Direction: ");
+     Serial.print(" Direction: ");
      Serial.println(encdir2);
  //     Serial.print(" -- Value: ");
 //     Serial.println(counter2);
@@ -116,7 +116,7 @@ void receiveEvent(int bytes)
   {
     if (counter == 1)
     {
-        Serial.println("switch_off");
+        Serial.println("off");
         delay(100);   
         counter=0;
     }
@@ -126,7 +126,7 @@ void receiveEvent(int bytes)
   {
     if (counter == 0)
     {
-        Serial.println("switch_on");
+        Serial.println("on");
         delay(100);   
         counter=1;
     }
@@ -137,7 +137,7 @@ void receiveEvent(int bytes)
   potmeterVal = map(potmeterVal,0,1000,1,8);
   if (potmeterVal != potmeterValprev)
   {
-    Serial.print("slide_");              // Show the value on the serial monitor
+    Serial.print("slide resistor value");              // Show the value on the serial monitor
     Serial.println(potmeterVal);
     delay(100);
   }
