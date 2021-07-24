@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" name="Pragma" content="no-cache">
+    <title>MSE Prototype</title>
+
+    <!-- Bootstrap -->
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap -->
+
+    <!----Socket to send stuff to arduino --->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/098aba01d6.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Font Awesome -->
+
+
+
+
+    <!---CSS-->
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            position: relative;
+            background-color: #3b3e42;
+            /* background-image: url('img/grid-bg.jpg'); */
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .bar-top {
+            position: absolute;
+            left: 25vw;
+            top: 15vw;
+            width: 30vw;
+            z-index: 2;
+        }
+
+        .bar-bottom {
+            position: absolute;
+            left: 25vw;
+            top: 25vw;
+            width: 30vw;
+            z-index: 2;
+
+        }
+
+        .clue-object {
+            position: absolute;
+            width: 7vw;
+            height: 7vw;
+            z-index: 1;
+            left: 30vw;
+            top: 21vw;
+            background-color: #0470ba;
+        }
+
+        .clue-text {
+            position: absolute;
+            color: white;
+            font-size: 1.2vw;
+            top: 22.5vw;
+            left: 32.3vw;
+            z-index: 2;
+        }
+
+        .switch-tensile {
+            position: absolute;
+            left: 70vw;
+            width: 10vw;
+            top: 17vw;
+            z-index: 1;
+        }
+
+        .switch-button {
+            position: absolute;
+            border-radius: 10px;
+            width: 2.5vw;
+            height: 2.5vw;
+            z-index: 1;
+            left: 71.7vw;
+            top: 18.5vw;
+            background-color: gray;
+
+        }
+
+        .broken-piece-top {
+            -webkit-mask-image: linear-gradient(to bottom right,
+                    white,
+                    white 50%,
+                    transparent 50%,
+                    transparent),
+                linear-gradient(to top,
+                    transparent 30px,
+                    black 30px,
+                    white);
+            mask-image: linear-gradient(to bottom right,
+                    white,
+                    white 50%,
+                    transparent 50%,
+                    transparent),
+                linear-gradient(to top,
+                    transparent 30px,
+                    black 30px,
+                    white);
+            -webkit-mask-size: 30px 30px, 100% 100%;
+            mask-size: 30px 30px, 100% 100%;
+            -webkit-mask-repeat: repeat-x;
+            mask-repeat: repeat-x;
+            -webkit-mask-position: left bottom;
+            mask-position: left bottom;
+            display: block;
+            margin-bottom: 0.5em;
+            width: 7vw;
+            height: 15vw;
+            position: absolute;
+            left: 30vw;
+            top: 5vw;
+        }
+
+        .broken-piece-bottom {
+            -webkit-mask-image: linear-gradient(to top right,
+                    white,
+                    white 50%,
+                    transparent 50%,
+                    transparent),
+                linear-gradient(to bottom,
+                    transparent 30px,
+                    black 30px,
+                    white);
+            mask-image: linear-gradient(to top right,
+                    white,
+                    white 50%,
+                    transparent 50%,
+                    transparent),
+                linear-gradient(to bottom,
+                    transparent 30px,
+                    black 30px,
+                    white);
+            -webkit-mask-size: 30px 30px, 100% 100%;
+            mask-size: 30px 30px, 100% 100%;
+            -webkit-mask-repeat: repeat-x;
+            mask-repeat: repeat-x;
+            -webkit-mask-position: right top;
+            mask-position: right top;
+            display: block;
+            margin-bottom: 0.5em;
+            width: 7vw;
+            height: 15vw;
+            position: absolute;
+            left: 30vw;
+            top: 27vw;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="container relative">
+        <img class="bar-top" src="img/tensile-bar.png">
+        <img class="bar-bottom" src="img/tensile-bar.png">
+        <div class="clue-object"></div>
+        <div class="clue-text">Clue</div>
+        <img class="switch-tensile" src="img/tensile-switch.jpg">
+        <div class="switch-button"></div>
+        <img class="broken-piece-top broken-piece" src="img/clue-piece.png">
+        <img class="broken-piece-bottom broken-piece" src="img/clue-piece.png">
+    </div>
+
+
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Script -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            var firstClueNo = window.localStorage.getItem("firstClue");
+            var isTensile = false; //all cannot conduct electricity except for A
+
+            if (firstClueNo == "D") {
+                isTensile = true;
+            }
+
+            //sending and receiving data
+            var socket = io();
+
+            var messageReceived;
+
+            socket.on('data', function (data) {
+                console.log(data);
+                //data is what is received
+                messageReceived = data + "";
+                if (messageReceived == "slide_7") {
+                    $(".switch-button").animate({ top: "26.3vw" });
+                    setTimeout(function () {
+                        $(".bar-top").animate({ top: "3vw" }, 5000);
+                        $(".bar-bottom").animate({ top: "38vw" }, 5000);
+                        $(".clue-object").animate({ height: "30vw", top: "9vw" }, 5000);
+                        if (!isTensile) {
+                            setTimeout(function () {
+                                $(".broken-piece").show()
+                                $(".clue-object").fadeOut()
+                                setTimeout(function () {
+                                    $(".clue-text").fadeOut();
+                                }, 1000);
+
+                            }, 4000);
+                        }
+                    }, 550);
+                }
+            });
+
+            $(".broken-piece").hide()
+
+            document.addEventListener('keydown', function (event) {
+                switch (event.key) {
+                    case "Enter": //Enter key
+                        $(".switch-button").animate({ top: "26.3vw" });
+                        setTimeout(function () {
+                            $(".bar-top").animate({ top: "3vw" }, 5000);
+                            $(".bar-bottom").animate({ top: "38vw" }, 5000);
+                            $(".clue-object").animate({ height: "30vw", top: "9vw" }, 5000);
+                            if (!isTensile) {
+                                setTimeout(function () {
+                                    $(".broken-piece").show()
+                                    $(".clue-object").fadeOut()
+                                    setTimeout(function () {
+                                        $(".clue-text").fadeOut();
+                                    }, 1000);
+
+                                }, 4000);
+                            }
+
+
+
+                        }, 550);
+
+
+                        break;
+                    case "ArrowLeft":
+                        window.location.href = "test-selection-part1.html"
+                        break;
+                    default:
+                        return;
+                }
+            });
+
+
+
+
+        });
+
+    </script>
+
+</body>
+
+</html>

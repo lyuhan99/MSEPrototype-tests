@@ -216,7 +216,8 @@
                         }, 700);
                     }
 
-
+                } else if (messageReceived = "1"){
+                    
                 }
             });
 
@@ -224,43 +225,43 @@
             document.addEventListener('keydown', function (event) {
                 switch (event.key) {
                     case "Enter": //Enter key
-                        if (!switchOn) {
-                            //$(".switch-btn").animate({ left: "45.7vw" });
-                            localStorage.setItem('firstClueHydrophobicTest', true);
-                            $(".tap-dial").removeClass("tap-animation-off")
-                            $(".tap-dial").addClass("tap-animation-on")
-                            setTimeout(function () {
-                                $(".test-image").attr("src", "img/tap-start.jpg");
-                                setTimeout(function () {
-                                    $(".test-image").attr("src", "img/tap-off.jpg");
-                                    $(".water-droplet").show()
-                                    $(".water-droplet").animate({ top: "29.5vw" });
-                                    setTimeout(function () {
-                                        if (isHydrophobic) {
-                                            //do nothing
-                                        } else {
-                                            $(".water-droplet").hide()
-                                            $(".test-image").attr("src", "img/not-hydrophobic2.jpg");
-                                        }
-                                        //record that test has been done
-                                        $(".instruction-text").text("Press [Enter] to start again.")
-                                        switchOn = true;
-                                    }, 350);
-                                }, 100);
-                            }, 700);
-                        } else {
-                            //$(".switch-btn").animate({ left: "50.2vw" });
-                            $(".tap-dial").removeClass("tap-animation-on")
-                            $(".tap-dial").addClass("tap-animation-off")
-                            $(".water-droplet").fadeOut()
-                            setTimeout(function () {
-                                $(".water-droplet").animate({ top: "19.9vw" }); //return water droplet to original position
-                                $(".test-image").attr("src", "img/tap-off.jpg");
-                                $(".instruction-text").text("Press [Enter] to turn on the tap.")
-                            }, 700);
-                            switchOn = false;
+                        // if (!switchOn) {
+                        //     //$(".switch-btn").animate({ left: "45.7vw" });
+                        //     localStorage.setItem('firstClueHydrophobicTest', true);
+                        //     $(".tap-dial").removeClass("tap-animation-off")
+                        //     $(".tap-dial").addClass("tap-animation-on")
+                        //     setTimeout(function () {
+                        //         $(".test-image").attr("src", "img/tap-start.jpg");
+                        //         setTimeout(function () {
+                        //             $(".test-image").attr("src", "img/tap-off.jpg");
+                        //             $(".water-droplet").show()
+                        //             $(".water-droplet").animate({ top: "29.5vw" });
+                        //             setTimeout(function () {
+                        //                 if (isHydrophobic) {
+                        //                     //do nothing
+                        //                 } else {
+                        //                     $(".water-droplet").hide()
+                        //                     $(".test-image").attr("src", "img/not-hydrophobic2.jpg");
+                        //                 }
+                        //                 //record that test has been done
+                        //                 $(".instruction-text").text("Press [Enter] to start again.")
+                        //                 switchOn = true;
+                        //             }, 350);
+                        //         }, 100);
+                        //     }, 700);
+                        // } else {
+                        //     //$(".switch-btn").animate({ left: "50.2vw" });
+                        //     $(".tap-dial").removeClass("tap-animation-on")
+                        //     $(".tap-dial").addClass("tap-animation-off")
+                        //     $(".water-droplet").fadeOut()
+                        //     setTimeout(function () {
+                        //         $(".water-droplet").animate({ top: "19.9vw" }); //return water droplet to original position
+                        //         $(".test-image").attr("src", "img/tap-off.jpg");
+                        //         $(".instruction-text").text("Press [Enter] to turn on the tap.")
+                        //     }, 700);
+                        //     switchOn = false;
 
-                        }
+                        // }
                         break;
                     case "ArrowLeft":
                         window.location.href = "test-selection-part1.html"
